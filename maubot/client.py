@@ -486,8 +486,6 @@ class Client(DBClient):
             return
         if device_id is None:
             device_id = self.device_id
-        elif not device_id:
-            device_id = None
         if (
             access_token == self.access_token
             and homeserver == self.homeserver
