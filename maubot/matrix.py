@@ -70,6 +70,7 @@ async def parse_formatted(
 
 class MaubotMessageEvent(MessageEvent):
     client: MaubotMatrixClient
+    base: MessageEvent
     disable_reply: bool
 
     def __init__(self, base: MessageEvent, client: MaubotMatrixClient):
@@ -78,6 +79,9 @@ class MaubotMessageEvent(MessageEvent):
         )
         self.client = client
         self.disable_reply = client.disable_replies
+        self.base = base
+        if "mautrix" in base:
+            self["mautrix"] = base["mautrix"]
 
     async def respond(
         self,
